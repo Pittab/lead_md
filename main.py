@@ -41,3 +41,5 @@ def render(input_list: List[Any]):
                     bulletlist(item)
             case x if "*" in x:
                 bold(item)
+            case _:
+                producesyntaxed.producesyntaxed(item, 'grey')
