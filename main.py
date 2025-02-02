@@ -1,19 +1,36 @@
 import producesyntaxed
 from typing import List, Any
 
-def bulletlist(item):
-    producesyntaxed.producesyntaxed("- " + item.strip("*"), 'grey')
 
+#Kinda self explanatory, makes bullet lists
+def bulletlist(item):
+    splititem=item.split()
+    splititem.pop(0)
+    render([str("- " + ' '.join(splititem))])
+
+#Processes bold text
 def bold(line):
     line=line.split("*")
     bolds = [line[i] for i in range(len(line)) if i % 2 != 0]
     for item in line:
         if item not in bolds:
-            producesyntaxed.producesyntaxed(item, 'grey', True, False)
-        else:
             print(item, end=' ')
+        else:
+            producesyntaxed.producesyntaxed(item, 'aqua', True, False)
     print()
 
+#Processes strikethroughs
+def strikethrough(line):
+    line=line.split("~~")
+    tostrike = [line[i] for i in range(len(line)) if i % 2 != 0]
+    for item in line:
+        if item not in tostrike:
+            print(item, end=' ')
+        else:
+            producesyntaxed.producesyntaxed(item, 'grey', True, False)
+    print()
+
+#Processes headings TODO: maybe H6 and H5?
 def heading(line):
     line=line.split()
     if line[0] == "#":
@@ -28,7 +45,9 @@ def heading(line):
     if line[0] == "####":
         line.pop(0)
         print(' '.join(line))
+    print()
 
+#Run this command to render le text
 def render(input_list: List[Any]):
     for item in input_list:
         match item:
@@ -41,5 +60,7 @@ def render(input_list: List[Any]):
                     bulletlist(item)
             case x if "*" in x:
                 bold(item)
+            case x if "~~" in x:
+                strikethrough(item)
             case _:
-                producesyntaxed.producesyntaxed(item, 'grey')
+                print(item)
