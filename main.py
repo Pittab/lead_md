@@ -1,3 +1,7 @@
+#Lead, a markdown renderer
+#Copyright Pittab 2025
+
+#imports
 import producesyntaxed
 from typing import List, Any
 
