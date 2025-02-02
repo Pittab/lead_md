@@ -11,7 +11,7 @@ from typing import List, Any
 def bulletlist(item):
     splititem=item.split()
     splititem.pop(0)
-    render([str("- " + ' '.join(splititem))])
+    renderalt([str("- " + ' '.join(splititem))])
 
 #Processes bold text
 def bold(line):
@@ -19,10 +19,9 @@ def bold(line):
     bolds = [line[i] for i in range(len(line)) if i % 2 != 0]
     for item in line:
         if item not in bolds:
-            print(item, end=' ')
+            renderalt([item])
         else:
             producesyntaxed.producesyntaxed(item, 'aqua', True, False)
-    print()
 
 #Processes strikethroughs
 def strikethrough(line):
@@ -30,13 +29,13 @@ def strikethrough(line):
     tostrike = [line[i] for i in range(len(line)) if i % 2 != 0]
     for item in line:
         if item not in tostrike:
-            print(item, end=' ')
+            renderalt([item])
         else:
             producesyntaxed.producesyntaxed(item, 'grey', True, False)
-    print()
 
 #Processes headings TODO: maybe H6 and H5?
 def heading(line):
+    print()
     line=line.split()
     if line[0] == "#":
         line.pop(0)
@@ -50,13 +49,12 @@ def heading(line):
     if line[0] == "####":
         line.pop(0)
         print(' '.join(line))
-    print()
 
 #Run this command to render le text
 def render(input_list: List[Any]):
     for item in input_list:
         match item:
-            case x if x.split()[0] in ["#", "##", "###", "####"]:
+            case x if x.startswith("#"):
                 heading(item)
             case x if x.startswith("*"):
                 if item.startswith ("* ") != True:
@@ -69,3 +67,22 @@ def render(input_list: List[Any]):
                 strikethrough(item)
             case _:
                 print(item)
+        print()
+
+#render an line that has already passed through 1 render cycle
+def renderalt(input_list: List[Any]):
+    for item in input_list:
+        match item:
+            case x if x.startswith("#"):
+                heading(item)
+            case x if x.startswith("*"):
+                if item.startswith ("* ") != True:
+                    bold(item)
+                else:
+                    bulletlist(item)
+            case x if "*" in x:
+                bold(item)
+            case x if "~~" in x:
+                strikethrough(item)
+            case _:
+                print(item, end=' ')

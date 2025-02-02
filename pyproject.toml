@@ -1,0 +1,16 @@
+[build-system]
+requires = ["setuptools", "wheel", "poetry-core>=1.0.0"]
+build-backend = "setuptools.build_meta"
+
+[tool.poetry]
+name = "lead"
+version = "1.0.0"
+description = "simple markdown renderer, powered by producesyntaxed"
+authors = ["Peter Rimmer"]
+license = "WTFPL"
+
+[tool.poetry.dependencies]
+python = "^3.6"
+
+[tool.poetry.dev-dependencies]
+pytest = "^6.2"
