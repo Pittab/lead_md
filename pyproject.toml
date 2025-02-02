@@ -3,7 +3,7 @@ requires = ["setuptools", "wheel", "poetry-core>=1.0.0"]
 build-backend = "setuptools.build_meta"
 
 [tool.poetry]
-name = "lead"
+name = "lead-md"
 version = "1.0.0"
 description = "simple markdown renderer, powered by producesyntaxed"
 authors = ["Peter Rimmer"]
