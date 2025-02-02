@@ -1,18 +1,14 @@
 [build-system]
-requires = ["setuptools", "wheel", "poetry-core>=1.0.0"]
-build-backend = "poetry.core.masonry.api"
+requires = ["setuptools", "wheel"]
+build-backend = "setuptools.build_meta"
 
-[tool.poetry]
-name = "lead-md"
-version = "1.0.5"
-description = "simple markdown renderer, powered by producesyntaxed"
-authors = ["Peter Rimmer <pittab.0001@gmail.com>"]
-license = "WTFPL"
-readme = "README.md"  # Specify if you have a README file
-
-[tool.poetry.dependencies]
-python = "^3.10"
-producesyntaxed = "^1.2.0"
-
-[tool.poetry.group.dev.dependencies]
-pytest = "^6.2"
+[project]
+name = "lead_md"
+version = "1.0.6"
+description = "Renders markdown to the terminal using producesyntaxed"
+readme = "README.md"
+authors = [{ name = "Pittab", email = "Pittab.0001@gmail.com" }]
+license = { file = "LICENCE" }
+dependencies = [
+    "producesyntaxed",
+]
