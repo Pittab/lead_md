@@ -1,5 +1,6 @@
 #Lead, a markdown renderer
 #Copyright Pittab 2025
+#Producesyntaxed by EyeScary-Development
 
 #imports
 import producesyntaxed
