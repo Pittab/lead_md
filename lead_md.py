@@ -66,7 +66,7 @@ def render(input_list: List[Any]):
             case x if "~~" in x:
                 strikethrough(item)
             case _:
-                print(item)
+                print(item, end='')
         print()
 
 #render an line that has already passed through 1 render cycle
