@@ -2,7 +2,7 @@ import producesyntaxed
 from typing import List, Any
 
 
-#Kinda self explanatory, makes bullet lists
+#Kinda self explanatory, makes bullet list strings and rerenders them for things like bold tags and strikethroughs
 def bulletlist(item):
     splititem=item.split()
     splititem.pop(0)
