@@ -11,7 +11,7 @@ from typing import List, Any
 def bulletlist(item):
     splititem=item.split()
     splititem.pop(0)
-    renderalt([str("- " + ' '.join(splititem))])
+    render([str("- " + ' '.join(splititem))], rerender=True)
 
 #Processes bold text
 def bold(line):
@@ -19,7 +19,7 @@ def bold(line):
     bolds = [line[i] for i in range(len(line)) if i % 2 != 0]
     for item in line:
         if item not in bolds:
-            renderalt([item])
+            render([item], rerender=True)
         else:
             producesyntaxed.producesyntaxed(item, 'aqua', True, False)
 
@@ -29,7 +29,7 @@ def strikethrough(line):
     tostrike = [line[i] for i in range(len(line)) if i % 2 != 0]
     for item in line:
         if item not in tostrike:
-            renderalt([item])
+            render([item], rerender=True)
         else:
             producesyntaxed.producesyntaxed(item, 'grey', True, False)
 
@@ -51,7 +51,7 @@ def heading(line):
         print(' '.join(line))
 
 #Run this command to render le text
-def render(input_list: List[Any]):
+def render(input_list: List[Any], rerender=False):
     for item in input_list:
         match item:
             case x if x.startswith("#"):
@@ -67,22 +67,6 @@ def render(input_list: List[Any]):
                 strikethrough(item)
             case _:
                 print(item, end='')
-        print()
+        if rerender != True:
+            print()
 
-#render an line that has already passed through 1 render cycle
-def renderalt(input_list: List[Any]):
-    for item in input_list:
-        match item:
-            case x if x.startswith("#"):
-                heading(item)
-            case x if x.startswith("*"):
-                if item.startswith ("* ") != True:
-                    bold(item)
-                else:
-                    bulletlist(item)
-            case x if "*" in x:
-                bold(item)
-            case x if "~~" in x:
-                strikethrough(item)
-            case _:
-                print(item, end=' ')
