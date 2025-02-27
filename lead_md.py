@@ -55,18 +55,18 @@ def render(input_list: List[Any], rerender=False):
     for item in input_list:
         match item:
             case x if x.startswith("#"):
-                heading(item)
+                heading(item.strip("\n"))
             case x if x.startswith("*"):
                 if item.startswith ("* ") != True:
-                    bold(item)
+                    bold(item.strip("\n"))
                 else:
-                    bulletlist(item)
+                    bulletlist(item.strip("\n"))
             case x if "*" in x:
-                bold(item)
+                bold(item.strip("\n"))
             case x if "~~" in x:
-                strikethrough(item)
+                strikethrough(item.strip("\n"))
             case _:
-                print(item, end='')
+                print(item.strip("\n"), end='')
         if rerender != True:
             print()
 
