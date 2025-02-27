@@ -11,7 +11,8 @@ from typing import List, Any
 def bulletlist(item):
     splititem=item.split()
     splititem.pop(0)
-    render([str("- " + ' '.join(splititem))], rerender=True)
+    print("- ", end="")
+    render([str(' '.join(splititem))], rerender=True)
 
 #Processes bold text
 def bold(line):
@@ -56,12 +57,9 @@ def render(input_list: List[Any], rerender=False):
         match item:
             case x if x.startswith("#"):
                 heading(item.strip("\n"))
-            case x if x.startswith("*"):
-                if item.startswith ("* ") != True:
-                    bold(item.strip("\n"))
-                else:
+            case x if x.startswith("* ") or x.startswith("- "):
                     bulletlist(item.strip("\n"))
-            case x if "*" in x:
+            case x if "**" in x:
                 bold(item.strip("\n"))
             case x if "~~" in x:
                 strikethrough(item.strip("\n"))
